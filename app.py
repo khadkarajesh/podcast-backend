@@ -1,14 +1,15 @@
+from dotenv import load_dotenv
 from flask import Flask, jsonify
 from marshmallow import ValidationError
 
 from auth.auth_app import auth_app
-from extentions import db, migrate, marshmallow
+from extentions import db, migrate, marshmallow, mail
+
+load_dotenv('.env')
 
 app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://rajesh:hello@1234@localhost/podcast'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['PROPAGATE_EXCEPTIONS'] = True
+app.config.from_object('config.default')
+app.config.from_envvar('CONFIGURATION_FILE')
 
 app.register_blueprint(auth_app, url_prefix='/auth')
 
@@ -17,6 +18,7 @@ with app.test_request_context():
     db.create_all()
     migrate.init_app(app, db)
     marshmallow.init_app(app)
+    mail.init_app(app)
 
 
 @app.errorhandler(ValidationError)
