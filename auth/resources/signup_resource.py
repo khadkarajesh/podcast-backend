@@ -2,9 +2,9 @@ from flask import request
 from flask_restful import Resource
 
 from auth.manager.auth_manager import create_user
-from auth.schemas.signup_schema import SignupSchema
+from auth.schemas.signup_schema import UserSchema
 
-signup_schema = SignupSchema()
+signup_schema = UserSchema()
 
 
 class SignupResource(Resource):

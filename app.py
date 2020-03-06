@@ -7,7 +7,7 @@ from extentions import db, migrate, marshmallow, mail
 
 load_dotenv('.env')
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 app.config.from_object('config.default')
 app.config.from_envvar('CONFIGURATION_FILE')
 

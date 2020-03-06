@@ -9,7 +9,7 @@ PASSWORD_REGEX = r'(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*
 PASSWORD_VALIDATION_MESSAGE = 'Password must be of minimum length 8, alphanumeric, special character, capital letter'
 
 
-class SignupSchema(marshmallow.ModelSchema):
+class UserSchema(marshmallow.ModelSchema):
     email = fields.Email(required=True)
 
     class Meta:

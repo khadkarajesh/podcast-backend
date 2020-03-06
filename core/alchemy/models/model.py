@@ -19,3 +19,7 @@ class BaseModel(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+    @classmethod
+    def commit(cls):
+        db.session.commit()
