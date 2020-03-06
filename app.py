@@ -1,8 +1,9 @@
 from dotenv import load_dotenv
-from flask import Flask, jsonify
+from flask import Flask
 from marshmallow import ValidationError
 
 from auth.auth_app import auth_app
+from core.exceptions.base_error import BaseError
 from extentions import db, migrate, marshmallow, mail
 
 load_dotenv('.env')
@@ -24,6 +25,11 @@ with app.test_request_context():
 @app.errorhandler(ValidationError)
 def validation_error(e):
     return e.messages
+
+
+@app.errorhandler(BaseError)
+def app_error_handler(e):
+    return e.json(), e.code
 
 
 @app.route('/')
