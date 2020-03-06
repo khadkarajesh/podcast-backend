@@ -132,6 +132,3 @@ dmypy.json
 
 # intellij
 .idea
-
-static/
-templates/
