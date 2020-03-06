@@ -10,7 +10,7 @@ def create_user(user):
     token = generate_token({'email': user.email})
     html = render_template('email_verification.html',
                            url=F'http://localhost.com/email-verification?token={token}')
-    send_email(recipients=['rajesh.k.khadka@gmail.com'],
+    send_email(recipients=[user.email],
                subject='Email Verification',
                body='Reset your password',
                html=html)
