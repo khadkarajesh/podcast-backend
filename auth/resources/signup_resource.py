@@ -11,4 +11,4 @@ class SignupResource(Resource):
     @classmethod
     def post(cls):
         user = signup_schema.load(request.json)
-        return signup_schema.dump(create_user(user))
+        return UserSchema(load_only=('password',)).dump(create_user(user))
